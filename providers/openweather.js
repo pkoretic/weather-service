@@ -5,7 +5,7 @@ const request = require("../lib/request")
 // default api url
 // xml is used since it somehow contains different data than json format
 // api_key is appid from openweather.org that has to be obtained
-const api_key = ""
+const api_key = process.env.PROVIDER_API_KEY
 
 console.assert(api_key, "please provide valid appid from http://openweathermap.org/appid")
 

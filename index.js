@@ -4,6 +4,7 @@ const compress = require("koa-compress")
 const etag = require("koa-etag")
 const serve = require("koa-static-server")
 const router = require("./routes/forecast")
+const authorize = require("./lib/authorize")
 const Koa = require("koa")
 
 const app = new Koa()
@@ -31,6 +32,9 @@ app.use(async (ctx, next) =>
     const ms = Date.now() - start
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
+
+// check authorization key if provided
+app.use(authorize)
 
 // set HTTP ETag to avoid sending same data to clients
 app.use(conditional())

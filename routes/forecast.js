@@ -2,7 +2,7 @@ const Router = require("koa-router")
 const router = new Router()
 
 // use specified provider, "openweather" by default
-const provider = require("../providers/" + (process.env.PROVIDER || "openweather"))
+const provider = require("../providers/" + (process.env.PROVIDER_NAME || "openweather"))
 
 router.get("/forecast", async (ctx) =>
 {
@@ -13,7 +13,7 @@ router.get("/forecast", async (ctx) =>
 
     // check for valid request
     if (!city && (!lat || !lon))
-        return ctx.status = 400
+        ctx.throw(400)
 
     // on internal errors return 500
     try
