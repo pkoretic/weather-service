@@ -1,6 +1,14 @@
 # weather-service
 Node.js weather service.
 
+  * [Running](#running)
+  * [Configuration](#configuration)
+  * [API](#api)
+  * [Caching, Compression, HTTP/2](#caching-compression-http2)
+  * [Providers](#providers)
+  * [Scalability](#scalability)
+  * [Testing](#testing)
+
 ## Running
 
 Node 9.x should be used in case of HTTP/2 support.
