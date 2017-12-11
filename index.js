@@ -5,6 +5,7 @@ const etag = require("koa-etag")
 const serve = require("koa-static-server")
 const router = require("./routes/forecast")
 const authorize = require("./lib/authorize")
+const cache = require("./lib/cache")
 const Koa = require("koa")
 
 const app = new Koa()
@@ -41,11 +42,14 @@ app.use(conditional())
 app.use(etag())
 
 // serve images
-app.use(serve({rootDir: "public/icons", rootPath: "/icon"}))
+app.use(serve({rootDir: "public/icons", rootPath: "/icon", maxage: 86400000 }))
 
 // spport HTTP compression of the response when requested
 // ignore if response is smaller than 256 bytes
 app.use(compress({ threshold: 256 }))
+
+// HTTP and in memory response caching
+app.use(cache())
 
 // our routes
 app.use(router.routes())
