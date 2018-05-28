@@ -9,7 +9,7 @@ const api_key = process.env.PROVIDER_API_KEY
 
 console.assert(api_key, "please provide valid appid from http://openweathermap.org/appid")
 
-const api_url = "https://weather.qaap.io/data/2.5/forecast" +
+const api_url = "https://api.openweathermap.org/data/2.5/forecast" +
                 "?cnt=8" +
                 "&mode=xml" +
                 "&units=metric" +
@@ -34,7 +34,15 @@ module.exports =
         // get data from the api by city name, i.e. "Berlin"
         if (typeof city === "string")
         {
-            const xml = await request(api_url + "&q=" + city)
+            try {
+                var xml = await request(api_url + "&q=" + city)
+                console.log(xml)
+            }
+            catch(e)
+            {
+                console.error(e)
+                return
+            }
             const json = fastXmlParser.parse(xml, xml_parse_options)
             return parse_response(json.weatherdata)
         }
