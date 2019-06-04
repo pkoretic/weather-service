@@ -1,7 +1,7 @@
 {
   "name": "weather_service",
   "version": "1.0.0",
-  "description": "",
+  "description": "A weather caching service",
   "main": "index.js",
   "dependencies": {
     "fast-xml-parser": "^2.9.4",
@@ -22,6 +22,6 @@
     "start": "node index.js",
     "test": "NODE_ENV=test mocha --exit test/*.spec.js"
   },
-  "author": "",
+  "author": "Petar Koretic",
   "license": "MIT"
 }
