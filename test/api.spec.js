@@ -83,8 +83,8 @@ describe("API", () =>
             .get("/forecast?lat=52.520008")
             .end((error, resp) =>
             {
-                should.exist(error)
-                resp.status.should.equal(400)
+                should.exist(resp.error)
+                expect(resp).to.have.status(400);
 
                 done()
             })
@@ -96,7 +96,7 @@ describe("API", () =>
             .get("/forecast?lon=13.404954")
             .end((error, resp) =>
             {
-                should.exist(error)
+                should.exist(resp.error)
                 resp.status.should.equal(400)
 
                 done()
@@ -109,7 +109,7 @@ describe("API", () =>
             .get("/forecast")
             .end((error, resp) =>
             {
-                should.exist(error)
+                should.exist(resp.error)
                 resp.status.should.equal(400)
 
                 done()
