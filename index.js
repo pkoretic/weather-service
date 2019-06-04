@@ -2,6 +2,7 @@ const fs = require("fs")
 const conditional = require("koa-conditional-get")
 const compress = require("koa-compress")
 const etag = require("koa-etag")
+const http2 = require("http2")
 const serve = require("koa-static-server")
 const router = require("./routes/forecast")
 const authorize = require("./lib/authorize")
@@ -55,10 +56,8 @@ app.use(cache())
 app.use(router.routes())
 app.use(router.allowedMethods())
 
-// start https or http2 server
-const server = (process.env.USE_HTTP2 === "true")
-    ? require("http2").createSecureServer(options, app.callback())
-    : require("https").createServer(options, app.callback())
+// start HTTP/2 server
+const server = http2.createSecureServer(options, app.callback())
 
 server.listen(http_port, http_host, () =>
 {

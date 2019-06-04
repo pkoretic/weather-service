@@ -11,14 +11,12 @@ Node.js weather service.
 
 ## Running
 
-Node 9.x should be used in case of HTTP/2 support.
-
 ```
 npm install
 PROVIDER_API_KEY=xxxx npm start
 ```
 
-By default this starts https server on the localhost, port 3000.
+By default this starts HTTP/2 server on the localhost, port 3000.
 ```
 listening on localhost:3000
 ```
@@ -32,7 +30,6 @@ Configuration values can be changed by setting enviroment variables.
 
 * **HTTP_HOST** - provide alternative host for the HTTP server
 * **HTTP_PORT** - provide alternative port for the HTTP server
-* **USE_HTTP2=true** - use HTTP/2 server (with HTTP/1.1 fallback) instead of HTTP/1.1
 * **ACCESS_KEY** - when set, clients need to provide this accessKey to authorize requests
 * **PROVIDER_NAME** - set weather service provider, currently only **openweather** is supported
 which is also a default value
@@ -40,7 +37,7 @@ which is also a default value
 
 Example usage:
 ```
-HTTP_PORT=3001 USE_HTTP2=true ACCESS_KEY=1234 PROVIDER_API_KEY=xxxx npm start
+HTTP_PORT=3001 ACCESS_KEY=1234 PROVIDER_API_KEY=xxxx npm start
 ```
 
 ## API
@@ -130,8 +127,7 @@ HTTP_PORT=3001 USE_HTTP2=true ACCESS_KEY=1234 PROVIDER_API_KEY=xxxx npm start
 ## Caching, Compression, HTTP/2
 
 Service employs multiple techniques to minimize the latency and data returned to the client.
-* HTTP/2 - supports HTTP/2 by using `USE_HTTP2=true` env settings which reduces data size.
-***Note*** it is not enabled by default since Node module is still in experimental state.
+* HTTP/2 - enabled by default but also supports HTTP/1 through ALPN.
  * HTTP compression - supports standard HTTP gzip, deflate compression to minimize data size.
  * HTTP and in memory caching - caches requests for a specified amount of time to avoid processing
  data at each request returning Cache-Control headers to the client.
