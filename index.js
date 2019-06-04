@@ -44,7 +44,7 @@ app.use(etag())
 // serve images
 app.use(serve({rootDir: "public/icons", rootPath: "/icon", maxage: 86400000 }))
 
-// spport HTTP compression of the response when requested
+// support HTTP compression of the response when requested
 // ignore if response is smaller than 256 bytes
 app.use(compress({ threshold: 256 }))
 
